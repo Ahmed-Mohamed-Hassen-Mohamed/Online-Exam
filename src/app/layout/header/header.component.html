@@ -1,0 +1,87 @@
+<div
+  class="shadow"
+  style="background-color: #436850; height: 10.3%; position: sticky; top: 0; z-index: 1111"
+>
+  <div class="container">
+    <nav class="navbar navbar-light m-0">
+      <div
+        class="d-flex navbar-collapse justify-content-between"
+        id="navbarTogglerDemo03"
+      >
+        <div class="navbar-brand d-flex align-items-center">
+          <a
+            class="navbar-brand text-info fs-5 fw-bolder p-2 pt-1 pb-1"
+            style="
+              font-family: cursive !important;
+              border: 2px solid white;
+              background-color: #ADBC9F;
+              border-radius: 5px;
+            "
+            routerLink="/"
+          >
+            <img [src]="img" style="width: 35px;" alt="">
+            <span class="text-white" style="line-height: 100%">Full</span>
+            <span class="text-success"> Mark</span>
+          </a>
+        </div>
+        <div class="d-flex">
+          <mat-menu #appMenu="matMenu" class="mt-4">
+            <ng-template matMenuContent>
+              <button mat-menu-item (click)="addGroup()" *ngIf="user.role == 1">
+                <mat-icon style="margin-right: 5px">createIcon</mat-icon> Create
+                Group
+              </button>
+              <button mat-menu-item (click)="joinGroup()">
+                <mat-icon style="margin-right: 8px">groupAddIcon</mat-icon> Join
+                Group
+              </button>
+            </ng-template>
+          </mat-menu>
+          <p
+            class="d-flex align-items-center justify-content-center mb-0"
+            style="
+              width: 40px;
+              height: 40px;
+              border-radius: 5px;
+              border: 2px solid white;
+              cursor: pointer;
+            "
+            mat-icon-button
+            [matMenuTriggerFor]="appMenu"
+            *ngIf="token"
+          >
+            <mat-icon class="text-white">add</mat-icon>
+          </p>
+          <p
+            class="d-flex align-items-center justify-content-center m-3 mt-0 mb-0"
+            style="
+              width: 40px;
+              height: 40px;
+              border-radius: 5px;
+              border: 2px solid white;
+              cursor: pointer;
+            "
+            routerLink="/profile"
+            *ngIf="token"
+          >
+            <mat-icon class="text-white">person</mat-icon>
+          </p>
+          <p
+            class="d-flex align-items-center justify-content-center text-white p-2 pt-0 pb-0 fs-5 mb-0"
+            style="
+              height: 40px;
+              border-radius: 5px;
+              border: 2px solid white;
+              cursor: pointer;
+            "
+            (click)="logOut()"
+            routerLink="/signin"
+            *ngIf="token"
+          >
+            <mat-icon>logoutIcon</mat-icon>
+          </p>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>

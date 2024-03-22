@@ -1,0 +1,197 @@
+<div class="pb-5">
+  <div class="container p-0 mt-5" style="border: 2px solid #436850">
+    <h3
+      class="pt-4 pb-4 text-center fs-4 fw-bolder"
+      style="
+        opacity: 0.7;
+        text-shadow: 2px 2px #a3a3a3;
+        border-bottom: 2px solid #436850;
+      "
+    >
+      <mat-icon class="fs-3">add</mat-icon>
+      <span class="text-success"> Question</span>
+    </h3>
+    <br />
+    <div class="mb-3 row m-0">
+      <form
+        class="col-lg-8 m-auto row mb-5"
+        [formGroup]="userForm"
+        (ngSubmit)="onSubmit(userForm.value)"
+      >
+        <div class="mb-4 col-sm-12 p-0">
+          <input
+            type="text"
+            class="form-control p-2"
+            placeholder="Title"
+            id="title"
+            formControlName="title"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          />
+          <div
+            *ngIf="
+              userForm.controls.title.invalid && userForm.controls.title.touched
+            "
+          >
+            <p
+              class="alert alert-danger"
+              *ngIf="userForm.controls.title.errors?.['required']"
+            >
+              Title is required ...
+            </p>
+            <p
+              class="alert alert-danger"
+              *ngIf="userForm.controls.title.errors?.['minlength']"
+            >
+              Title minlength is
+              {{userForm.controls.title.errors?.['minlength'].requiredLength}},
+              but You have entered
+              {{userForm.controls.title.errors?.['minlength'].actualLength}}
+            </p>
+          </div>
+        </div>
+        <div class="mb-4 col-sm-12 p-0">
+          <input
+            type="text"
+            class="form-control p-2"
+            placeholder="Choice 1"
+            id="choice1"
+            formControlName="choice1"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          />
+          <div
+            *ngIf="
+              userForm.controls.choice1.invalid &&
+              userForm.controls.choice1.touched
+            "
+          >
+            <p
+              class="alert alert-danger"
+              *ngIf="userForm.controls.choice1.errors?.['required']"
+            >
+              Choice 1 is required ...
+            </p>
+          </div>
+        </div>
+        <div class="mb-4 col-sm-12 p-0">
+          <input
+            type="text"
+            class="form-control p-2"
+            placeholder="Choice 2"
+            id="choice2"
+            formControlName="choice2"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          />
+          <div
+            *ngIf="
+              userForm.controls.choice2.invalid &&
+              userForm.controls.choice2.touched
+            "
+          >
+            <p
+              class="alert alert-danger"
+              *ngIf="userForm.controls.choice2.errors?.['required']"
+            >
+              Choice 2 is required ...
+            </p>
+          </div>
+        </div>
+        <div class="mb-4 col-sm-12 p-0">
+          <input
+            type="text"
+            class="form-control p-2"
+            placeholder="Choice 3"
+            id="choice3"
+            formControlName="choice3"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          />
+        </div>
+        <div class="mb-4 col-sm-12 p-0">
+          <input
+            type="text"
+            class="form-control p-2"
+            placeholder="Choice 4"
+            id="choice4"
+            formControlName="choice4"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          />
+        </div>
+        <div class="mb-4 col-sm-4 p-0">
+          <input
+            type="number"
+            class="form-control p-2"
+            placeholder="Answer"
+            id="answer"
+            formControlName="answer"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          />
+          <div
+            *ngIf="
+              userForm.controls.answer.invalid &&
+              userForm.controls.answer.touched
+            "
+          >
+            <p
+              class="alert alert-danger"
+              *ngIf="userForm.controls.answer.errors?.['required']"
+            >
+              Answer is required ...
+            </p>
+          </div>
+        </div>
+        <div class="mb-4 col-sm-8">
+          <select
+            class="form-control p-2"
+            id="exam"
+            formControlName="exam"
+            style="border-radius: 0; border-left: 5px solid #436850"
+          >
+            <option selected value="">Exam..</option>
+            <option *ngFor="let exam of exams" [value]="exam._id">
+              {{ exam.title }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              userForm.controls.exam.invalid && userForm.controls.exam.touched
+            "
+          >
+            <p
+              class="alert alert-danger"
+              *ngIf="userForm.controls.exam.errors?.['required']"
+            >
+              Exam is required ...
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-12 row">
+          <div class="col-sm-6 mb-3 p-0">
+            <input
+              type="file"
+              class="form-control p-2"
+              id="image"
+              (change)="handelUpload($event)"
+              formControlName="image"
+              style="display: none"
+            />
+            <label for="image" class="text-primary"
+              ><mat-icon style="color: #436850">image</mat-icon>
+            </label>
+          </div>
+          <div class="mb-3 col-sm-6 row">
+            <div *ngFor="let img of images" class="col-3 p-1">
+              <img style="width: 150px; height: 100px" [src]="img" alt="" />
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn text-white"
+          style="border-radius: 0; background-color: #436850"
+          [disabled]="userForm.invalid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

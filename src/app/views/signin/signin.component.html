@@ -1,0 +1,125 @@
+<div class="row m-0" style="height: 89.7%">
+  <div class="col-lg-6 d-flex" style="background-color: #436850; height: 100%">
+    <div class="navbar-brand d-flex align-items-center m-auto">
+      <div class="mb-5">
+        <h3
+          class="text-center text-white mb-4 fs-5 fw-bolder"
+          style="font-family: cursive"
+        >
+          Welcome to
+        </h3>
+        <a
+          class="navbar-brand text-info fs-5 fw-bolder p-2 pt-1"
+          style="
+            font-family: cursive !important;
+            border: 2px solid white;
+            background-color: #adbc9f;
+            border-radius: 5px;
+          "
+          routerLink="/"
+        >
+          <img [src]="img" style="width: 35px" alt="" />
+          <span class="text-white" style="line-height: 100%">Full</span>
+          <span class="text-success"> Mark</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 row m-0" style="height: 100%">
+    <form
+      class="col-lg-8 m-auto"
+      [formGroup]="userForm"
+      (ngSubmit)="onSubmit(userForm.value)"
+    >
+      <div class="mb-5">
+        <input
+          type="email"
+          class="form-control p-2"
+          placeholder="Email"
+          id="email"
+          formControlName="email"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <div
+          *ngIf="
+            userForm.controls.email.invalid && userForm.controls.email.touched
+          "
+        >
+          <p
+            class="alert alert-danger"
+            *ngIf="userForm.controls.email.errors?.['required']"
+          >
+            Email is required ...
+          </p>
+          <p
+            class="alert alert-danger"
+            *ngIf="userForm.controls.email.errors?.['email']"
+          >
+            Please enter valid email ...
+          </p>
+        </div>
+      </div>
+      <div class="mb-3 mt-3 position-relative">
+        <input
+          [type]="hide ? 'password' : 'text'"
+          class="form-control p-2"
+          placeholder="Password"
+          id="password"
+          formControlName="password"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <p
+          class="position-absolute top-0 end-0 m-2 mb-0 pb-0 text-muted"
+          style="background-color: transparent; border: 0; border-radius: 40%"
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </p>
+        <div
+          *ngIf="
+            userForm.controls.password.invalid &&
+            userForm.controls.password.touched
+          "
+        >
+          <p
+            class="alert alert-danger"
+            *ngIf="userForm.controls.password.errors?.['required']"
+          >
+            Password is required...
+          </p>
+          <p
+            class="alert alert-danger"
+            *ngIf="userForm.controls.password.errors?.['minlength']"
+          >
+            Password minlength is
+            {{userForm.controls.password.errors?.['minlength'].requiredLength}},
+            but You have entered
+            {{userForm.controls.password.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <p class="alert alert-danger" *ngIf="invalidLogin">
+        Please check email or password
+      </p>
+      <button
+        type="submit"
+        class="btn text-white"
+        style="border-radius: 5px; border: 0; background-color: #436850"
+        [disabled]="userForm.invalid"
+      >
+        Sign in
+      </button>
+      <div class="d-flex justify-content-end">
+        <a style="cursor: pointer !important" routerLink="/forgetPassword"
+          >Forgot your password?</a
+        >
+      </div>
+      <p class="mt-5 text-center">
+        Don't have an account? <a app-sign-up routerLink="/signup">Sign up</a>
+      </p>
+    </form>
+  </div>
+</div>

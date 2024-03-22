@@ -1,0 +1,73 @@
+<div class="container pt-5 pb-5">
+  <div class="row">
+    <div
+      class="col-10 row m-0 m-auto card p-5 pt-4"
+      style="border: 3px solid #436850"
+    >
+      <div class="pb-4">
+        <h2 class="mb-0">{{ exam.title }}</h2>
+        <p class="mb-0">{{ exam.description }}</p>
+      </div>
+      <div class="progress bg-muted p-0" style="height: 10px">
+        <div
+          style="height: 10px"
+          class="progress-bar bg-success"
+          role="progressbar"
+          [style.width.%]="
+            (countDocuments.countAnswers / countDocuments.countQuestions) * 100
+          "
+        ></div>
+      </div>
+      <h2 class="fs-5 p-0 mt-4 mb-2">{{ question.title }}</h2>
+      <p
+        class="mb-2 {{
+          floor(this.RTime - seconds, 1000 * 60) < 3 ? 'text-danger' : ''
+        }} mb-0 fs-5 d-flex justify-content-end align-items-center"
+      >
+        <mat-icon class="m-1 mt-0 mb-0">alarmOn</mat-icon>
+        {{
+          floor(this.RTime + 2000 - seconds, 1000 * 60) +
+            " : " +
+            (((this.RTime + 2000 - seconds) % (1000 * 60)) / 1000).toFixed(0)
+        }}
+      </p>
+      <div class="mb-2 d-flex" *ngIf="question.image">
+        <img
+          [src]="'data:image/jpg;base64,' + question.image"
+          class="m-auto"
+          style="width: 60%"
+        />
+      </div>
+      <div
+        class="form-check mb-2"
+        *ngFor="let choice of choices; let i = index"
+      >
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gridRadios"
+          id="choice{{ i + 1 }}"
+          value="1"
+          (click)="Choice(1 + i)"
+        />
+        <label class="form-check-label text-muted fs-5" for="choice{{ i + 1 }}">
+          {{ choice }}
+        </label>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn btn-secondary p-5 pt-2 pb-2"
+          style="border-radius: 0; background-color: #0e42c4"
+          [disabled]="!answer"
+          (click)="MakeAnswer()"
+        >
+          {{
+            countDocuments.countQuestions - countDocuments.countAnswers == 1
+              ? "Submit"
+              : "Next"
+          }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

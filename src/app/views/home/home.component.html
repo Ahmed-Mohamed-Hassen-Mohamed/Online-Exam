@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-3" *ngFor="let group of groups">
+      <div class="mt-2 d-flex">
+        <img
+          [src]="'data:image/jpg;base64,' + group.image"
+          class="p-1 m-auto"
+          style="
+            width: 210px;
+            height: 130px;
+            border: 2px solid silver;
+            border-bottom: 0px;
+            cursor: pointer;
+          "
+          routerLink="/group/{{ group._id }}"
+        />
+      </div>
+      <div
+        class="bg-light d-flex align-items-center justify-content-center"
+        style="border: 3px solid silver; height: 45%"
+      >
+        <div class="p-4 m-auto">
+          <p class="fs-4 text-center" style="line-height: 100%">
+            {{ group.name }}
+          </p>
+          <p class="fw-bolder text-primary text-center mb-0">
+            {{ group.owner.firstname + " " + group.owner.lastname }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

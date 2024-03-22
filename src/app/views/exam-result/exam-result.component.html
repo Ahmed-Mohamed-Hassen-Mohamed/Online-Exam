@@ -1,0 +1,181 @@
+<div class="container mt-5 pb-5">
+  <div class="row position-relative">
+    <div
+      class="col-10 row m-0 m-auto card p-5 pt-4"
+      style="border: 3px solid #436850"
+    >
+      <div
+        class="rounded-circle position-absolute m-4 fs-2 text-danger d-flex align-items-center justify-content-center"
+        style="
+          background-color: rgb(247, 242, 242);
+          top: -50px;
+          right: -50px;
+          width: 100px;
+          height: 100px;
+          border: 2px dashed red;
+        "
+      >
+        {{ ((mark / countDocuments.countQuestions) * 100).toFixed(0) }}%
+      </div>
+      <div class="pb-4">
+        <h2 class="mb-0">{{ exam.title }}</h2>
+        <p class="mb-0" style="font-size: 15px; font-weight: 400">
+          {{ exam.description }}
+        </p>
+      </div>
+      <div class="progress bg-muted p-0" style="height: 10px">
+        <div
+          style="height: 10px"
+          class="progress-bar bg-success"
+          role="progressbar"
+          [style.width.%]="
+            (countDocuments.countAnswers / countDocuments.countQuestions) * 100
+          "
+        ></div>
+      </div>
+      <div class="" *ngFor="let question of questions; let i = index">
+        <h2 class="fs-5 mt-4 mb-2">{{ i + 1 }}. {{ question.title }}</h2>
+        <div class="p-3 mb-2 d-flex" *ngIf="question.image">
+          <img
+            [src]="'data:image/jpg;base64,' + question.image"
+            class="m-auto"
+            style="width: 60%"
+          />
+        </div>
+        <p
+          *ngIf="question.Answer.answer == 0"
+          class="d-flex text-danger align-items-center"
+        >
+          <mat-icon class="fs-4 m-2 mt-0 mb-0">report</mat-icon> You did not
+          answer the question
+        </p>
+        <div class="form-check mb-2 p-0 bg-light text-muted fs-5">
+          <p
+            *ngIf="question.answer != 1 && question.Answer.answer != 1"
+            class="fs p-4 pt-1 pb-1"
+          >
+            {{ question.choice1 }}
+          </p>
+          <p
+            *ngIf="
+              (question.Answer.answer == question.answer &&
+                question.Answer.answer == 1) ||
+              (question.Answer.answer != question.answer &&
+                question.answer == 1)
+            "
+            class="bg-success fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px">check</mat-icon>
+            {{ question.choice1 }}
+          </p>
+          <p
+            *ngIf="
+              question.Answer.answer != question.answer &&
+              question.Answer.answer == 1
+            "
+            class="bg-danger fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px"
+              >cancelPresentationOutlined</mat-icon
+            >{{ question.choice1 }}
+          </p>
+        </div>
+        <div class="form-check mb-2 p-0 bg-light text-muted fs-5">
+          <p
+            *ngIf="question.answer != 2 && question.Answer.answer != 2"
+            class="fs p-4 pt-1 pb-1"
+          >
+            {{ question.choice2 }}
+          </p>
+          <p
+            *ngIf="
+              (question.Answer.answer == question.answer &&
+                question.Answer.answer == 2) ||
+              (question.Answer.answer != question.answer &&
+                question.answer == 2)
+            "
+            class="bg-success fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px">check</mat-icon>
+            {{ question.choice2 }}
+          </p>
+          <p
+            *ngIf="
+              question.Answer.answer != question.answer &&
+              question.Answer.answer == 2
+            "
+            class="bg-danger fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px"
+              >cancelPresentationOutlined</mat-icon
+            >
+            {{ question.choice2 }}
+          </p>
+        </div>
+        <div class="form-check mb-2 p-0 bg-light text-muted fs-5" *ngIf="question.choice3">
+          <p
+            *ngIf="question.answer != 3 && question.Answer.answer != 3"
+            class="fs p-4 pt-1 pb-1"
+          >
+            {{ question.choice3 }}
+          </p>
+          <p
+            *ngIf="
+              (question.Answer.answer == question.answer &&
+                question.Answer.answer == 3) ||
+              (question.Answer.answer != question.answer &&
+                question.answer == 3)
+            "
+            class="bg-success fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px">check</mat-icon>
+            {{ question.choice3 }}
+          </p>
+          <p
+            *ngIf="
+              question.Answer.answer != question.answer &&
+              question.Answer.answer == 3
+            "
+            class="bg-danger fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px"
+              >cancelPresentationOutlined</mat-icon
+            >
+            {{ question.choice3 }}
+          </p>
+        </div>
+        <div class="form-check mb-2 p-0 bg-light text-muted fs-5" *ngIf="question.choice4">
+          <p
+            *ngIf="question.answer != 4 && question.Answer.answer != 4"
+            class="fs p-4 pt-1 pb-1"
+          >
+            {{ question.choice4 }}
+          </p>
+          <p
+            *ngIf="
+              (question.Answer.answer == question.answer &&
+                question.Answer.answer == 4) ||
+              (question.Answer.answer != question.answer &&
+                question.answer == 4)
+            "
+            class="bg-success fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px">check</mat-icon>
+            {{ question.choice4 }}
+          </p>
+          <p
+            *ngIf="
+              question.Answer.answer != question.answer &&
+              question.Answer.answer == 4
+            "
+            class="bg-danger fs d-flex align-items-center text-white p-4 pt-1 pb-1"
+          >
+            <mat-icon style="margin-right: 10px"
+              >cancelPresentationOutlined</mat-icon
+            >{{ question.choice4 }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

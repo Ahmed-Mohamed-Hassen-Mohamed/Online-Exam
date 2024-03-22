@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="p-4">
+    <img
+      [src]="'data:image/jpg;base64,' + group.image"
+      alt=""
+      style="width: 100%; height: 300px; border-radius: 10px"
+    />
+  </div>
+  <div class="m-5 mb-4 mt-0">
+    <div class="row">
+      <div class="col-lg-6">
+        <p class="fs-3">{{ group.name }}</p>
+        <p class="fw-bolder text-success mb-0">
+          {{ group.owner.firstname + " " + group.owner.lastname }}
+        </p>
+      </div>
+      <div
+        class="col-lg-6 d-flex align-items-center justify-content-end"
+        *ngIf="group.owner._id == user._id"
+      >
+        <p
+          class="d-flex align-items-center justify-content-center p-1 fs-5 m-2 mt-0 mb-0"
+          style="border-radius: 5px; border: 2px solid silver; cursor: pointer"
+          (click)="openDailog()"
+        >
+          <mat-icon>cropFreeIcon</mat-icon>
+        </p>
+        <mat-menu #appMenu="matMenu">
+          <ng-template matMenuContent>
+            <button mat-menu-item routerLink="/addExam/{{ group._id }}">
+              Exam
+            </button>
+            <button mat-menu-item routerLink="/addQuestion/{{ group._id }}">
+              Question
+            </button>
+          </ng-template>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+          <mat-icon class="fs-3">add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="m-4 mt-0" style="border-top: 2px solid silver">
+    <mat-tab-group>
+      <mat-tab label="Exams" style="height: auto">
+        <div class="row m-0 mt-4 mb-5">
+          <div class="col-4 mb-4" *ngFor="let exam of exams">
+            <div
+              class="bg-light position-relative"
+              style="border: 2px solid silver; height: 100%"
+            >
+              <span
+                *ngIf="group.owner._id == user._id"
+                class="position-absolute"
+                style="top: 20px; right: 20px"
+                routerLink="/examresults/{{ exam._id }}"
+                ><mat-icon>tableRowsIcon</mat-icon></span
+              >
+              <p
+                class="fs-4 p-3 mb-0 pt-4 bg-white text-success fw-bolder"
+                style="cursor: pointer"
+                routerLink="/exam/{{ exam._id }}"
+              >
+                {{ exam.title }}
+              </p>
+              <p class="fw-bolder text-secondary p-3 mb-0">
+                {{ exam.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Members">
+        <div class="mt-4 mb-5">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">R</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Countery</th>
+                <th scope="col">Join Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="text-success">T</th>
+                <td>
+                  {{ group.owner.firstname + " " + group.owner.lastname }}
+                </td>
+                <td>{{ group.owner.email }}</td>
+                <td>
+                  {{ group.owner.country }}
+                </td>
+                <td class="">{{ group.creationTime }}</td>
+              </tr>
+              <tr *ngFor="let member of members; let i = index">
+                <th scope="row">S</th>
+                <td>
+                  {{ member.member.firstname + " " + member.member.lastname }}
+                </td>
+                <td>{{ member.member.email }}</td>
+                <td>
+                  {{ member.member.country }}
+                </td>
+                <td class="">{{ member.joiningTime }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

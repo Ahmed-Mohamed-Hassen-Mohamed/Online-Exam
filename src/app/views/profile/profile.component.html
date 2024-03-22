@@ -1,0 +1,206 @@
+<div class="container mt-4 mb-5">
+  <div class="mb-3">
+    <!-- (ngSubmit)="signup(userForm.value)" -->
+    <form
+      class="col-lg-11 m-auto row m-0 pb-4"
+      style="border-bottom: 3px solid #436850"
+      #userForm="ngForm"
+    >
+      <div
+        class="mb-3 col-sm-6 p-0"
+        style="
+          padding-left: 0px;
+          border-radius: 0;
+          border: 1px solid silver;
+          border-left: 5px solid #436850;
+        "
+      >
+        <label for="firstname" class="form-label fs-5 text-primary m-2"
+          >Firstname</label
+        >
+        <input
+          type="text"
+          class="form-control bg-light p-2"
+          placeholder="Firstname"
+          id="firstname"
+          ngModel
+          #firstname="ngModel"
+          required
+          minlength="3"
+          name="firstname"
+          [(ngModel)]="user.firstname"
+          style="border: 0px; border-radius: 0"
+        />
+        <div *ngIf="firstname.invalid && firstname.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="firstname.errors?.['required']"
+          >
+            Firstname is required...
+          </p>
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="firstname.errors?.['minlength']"
+          >
+            Firstname minlength is
+            {{firstname.errors?.['minlength'].requiredLength}}, but You have
+            entered {{firstname.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <div
+        class="mb-3 col-sm-6 p-0"
+        style="
+          padding-left: 0px;
+          border-radius: 0;
+          border: 1px solid silver;
+          border-left: 5px solid #436850;
+        "
+      >
+        <label for="lastname" class="form-label fs-5 text-primary m-2"
+          >Lastname</label
+        >
+        <input
+          type="text"
+          class="form-control bg-light p-2"
+          placeholder="Lastname"
+          id="lastname"
+          ngModel
+          #lastname="ngModel"
+          required
+          minlength="3"
+          name="lastname"
+          style="border: 0px; border-radius: 0"
+          [(ngModel)]="user.lastname"
+        />
+        <div *ngIf="lastname.invalid && lastname.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="lastname.errors?.['required']"
+          >
+            Lastname is required...
+          </p>
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="lastname.errors?.['minlength']"
+          >
+            Lastname minlength is
+            {{lastname.errors?.['minlength'].requiredLength}}, but You have
+            entered {{lastname.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <div
+        class="mb-3 col-sm-6 p-0"
+        style="
+          padding-left: 0px;
+          border-radius: 0;
+          border: 1px solid silver;
+          border-left: 5px solid #436850;
+        "
+      >
+        <label for="email" class="form-label fs-5 text-primary m-2"
+          >Email</label
+        >
+        <input
+          type="email"
+          class="form-control bg-light p-2"
+          placeholder="Email"
+          id="email"
+          ngModel
+          #email="ngModel"
+          required
+          email
+          name="email"
+          style="border: 0; border-radius: 0"
+          [(ngModel)]="user.email"
+          [disabled]="true"
+        />
+        <div *ngIf="email.invalid && email.touched">
+          <p class="alert alert-danger mb-0" *ngIf="email.errors?.['required']">
+            Email is required ...
+          </p>
+          <p class="alert alert-danger mb-0" *ngIf="email.errors?.['email']">
+            Please enter valid email ...
+          </p>
+        </div>
+      </div>
+      <div
+        class="mb-3 col-sm-6 p-0"
+        style="
+          padding-left: 0px;
+          border-radius: 0;
+          border: 1px solid silver;
+          border-left: 5px solid #436850;
+        "
+      >
+        <label for="country" class="form-label fs-5 text-primary m-2"
+          >Country</label
+        >
+        <select
+          class="form-control bg-light p-2"
+          placeholder="Country"
+          id="country"
+          ngModel
+          #country="ngModel"
+          required
+          minlength="2"
+          name="country"
+          style="border: 0; border-radius: 0"
+          [(ngModel)]="user.country"
+        >
+          <option selected value="">Country</option>
+          <option *ngFor="let country of countries" [value]="country.name">
+            {{ country.name }}
+          </option>
+        </select>
+        <div *ngIf="country.invalid && country.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="country.errors?.['required']"
+          >
+            Country is required...
+          </p>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between p-0">
+        <p class="fw-bolder">{{ user.role == 0 ? "Student" : "Teacher" }}</p>
+        <button
+          type="submit"
+          class="col-3 btn text-white"
+          style="border-radius: 0; background-color: #436850"
+          [disabled]="userForm.invalid"
+        >
+          Save Change
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="row m-5 mt-4 mb-5">
+    <app-swiper [groups]="groups"></app-swiper>
+  </div>
+  <div class="row m-5 mt-4 pb-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Exam</th>
+          <th scope="col">Group</th>
+          <th scope="col">Teacher</th>
+          <th scope="col">Mark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ exam.exam.title }}</td>
+          <td>{{ exam.exam.group.name }}</td>
+          <td>
+            {{ exam.exam.owner.firstname + " " + exam.exam.owner.lastname }}
+          </td>
+          <td class="text-danger">{{ exam.mark * 100 + "%" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

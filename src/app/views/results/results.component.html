@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="m-5 mt-4 mb-4">
+    <h2 class="mb-0 p-2">{{ exam.title }}</h2>
+    <p class="mb-0 bg-light p-2" style="font-size: 15px; font-weight: 400">
+      {{ exam.description }}
+    </p>
+  </div>
+  <div class="row m-5 mt-4 pb-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Mark</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of results; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            {{ result.owner.firstname + " " + result.owner.lastname }}
+          </td>
+          <td>{{ result.startExam }}</td>
+          <td class="text-danger">{{ result.mark * 100 + "%" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

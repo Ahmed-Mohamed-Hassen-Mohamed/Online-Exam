@@ -1,0 +1,214 @@
+<div class="row m-0" style="height: 89.7%">
+  <div class="col-lg-6 d-flex" style="height: 100%; background-color: #436850">
+    <div class="navbar-brand d-flex align-items-center m-auto">
+      <div class="mb-5">
+        <h3
+          class="text-center text-white mb-4 fs-5 fw-bolder"
+          style="font-family: cursive"
+        >
+          Join
+        </h3>
+        <a
+          class="navbar-brand text-info fs-5 fw-bolder p-2 pt-1"
+          style="
+            font-family: cursive !important;
+            border: 2px solid white;
+            background-color: #adbc9f;
+            border-radius: 5px;
+          "
+          routerLink="/"
+        >
+          <img [src]="img" style="width: 35px" alt="" />
+          <span class="text-white" style="line-height: 100%">Full</span>
+          <span class="text-success"> Mark</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 p-0 row m-0" style="height: 100%">
+    <form
+      class="col-lg-10 m-auto row m-0"
+      #userForm="ngForm"
+      (ngSubmit)="signup(userForm.value)"
+    >
+      <div class="mb-3 col-sm-6" style="padding-left: 0px">
+        <input
+          type="text"
+          class="form-control p-2"
+          placeholder="Firstname"
+          id="firstname"
+          ngModel
+          #firstname="ngModel"
+          required
+          minlength="3"
+          name="firstname"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <div *ngIf="firstname.invalid && firstname.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="firstname.errors?.['required']"
+          >
+            Firstname is required...
+          </p>
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="firstname.errors?.['minlength']"
+          >
+            Firstname minlength is
+            {{firstname.errors?.['minlength'].requiredLength}}, but You have
+            entered {{firstname.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <div class="mb-3 col-sm-6 p-0">
+        <input
+          type="text"
+          class="form-control p-2"
+          placeholder="Lastname"
+          id="lastname"
+          ngModel
+          #lastname="ngModel"
+          required
+          minlength="3"
+          name="lastname"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <div *ngIf="lastname.invalid && lastname.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="lastname.errors?.['required']"
+          >
+            Lastname is required...
+          </p>
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="lastname.errors?.['minlength']"
+          >
+            Lastname minlength is
+            {{lastname.errors?.['minlength'].requiredLength}}, but You have
+            entered {{lastname.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <div class="mb-3 mt-3 col-sm-6" style="padding-left: 0px">
+        <select
+          class="form-control p-2"
+          placeholder="Country"
+          id="country"
+          ngModel
+          #country="ngModel"
+          required
+          minlength="2"
+          name="country"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        >
+          <option selected value="">Country</option>
+          <option *ngFor="let country of countries" [value]="country.name">
+            {{ country.name }}
+          </option>
+        </select>
+        <div *ngIf="country.invalid && country.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="country.errors?.['required']"
+          >
+            Country is required...
+          </p>
+        </div>
+      </div>
+      <div class="mb-3 mt-3 col-sm-6 p-0">
+        <select
+          class="form-control p-2"
+          placeholder="Gender"
+          id="gender"
+          ngModel
+          #gender="ngModel"
+          required
+          minlength="2"
+          name="gender"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        >
+          <option style="border-radius: 0" selected value="">Gender</option>
+          <option style="border-radius: 0" value="male">Male</option>
+          <option style="border-radius: 0" value="female">Female</option>
+        </select>
+        <div *ngIf="gender.invalid && gender.touched">
+          <p
+            class="alert alert-danger mb-0"
+            *ngIf="gender.errors?.['required']"
+          >
+            Gender is required...
+          </p>
+        </div>
+      </div>
+      <div class="mb-3 mt-3 p-0">
+        <input
+          type="email"
+          class="form-control p-2"
+          placeholder="Email"
+          id="email"
+          ngModel
+          #email="ngModel"
+          required
+          email
+          name="email"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <div *ngIf="email.invalid && email.touched">
+          <p class="alert alert-danger mb-0" *ngIf="email.errors?.['required']">
+            Email is required ...
+          </p>
+          <p class="alert alert-danger mb-0" *ngIf="email.errors?.['email']">
+            Please enter valid email ...
+          </p>
+        </div>
+      </div>
+      <div class="mb-3 mt-3 position-relative p-0">
+        <input
+          [type]="hide ? 'password' : 'text'"
+          class="form-control p-2"
+          placeholder="Password"
+          id="password"
+          ngModel
+          #password="ngModel"
+          required
+          minlength="8"
+          name="password"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <p
+          class="position-absolute top-0 end-0 m-2 mb-0 text-muted"
+          style="background-color: transparent; border: 0; border-radius: 40%"
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </p>
+        <div *ngIf="password.invalid && password.touched">
+          <p class="alert alert-danger" *ngIf="password.errors?.['required']">
+            Password is required...
+          </p>
+          <p class="alert alert-danger" *ngIf="password.errors?.['minlength']">
+            Password minlength is
+            {{password.errors?.['minlength'].requiredLength}}, but You have
+            entered {{password.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="p-3 pt-2 pb-2 btn text-white"
+        style="border-radius: 0; background-color: #436850"
+        [disabled]="userForm.invalid"
+      >
+        Submit
+      </button>
+      <p class="mt-5 text-center">
+        Have an account already? <a routerLink="/signin">Sign in</a>
+      </p>
+    </form>
+  </div>
+</div>

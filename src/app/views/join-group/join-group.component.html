@@ -1,0 +1,56 @@
+<div style="z-index: 222; border-radius: 5px" mat-dialog-content>
+  <h3
+    class="p-4 pt-3 pb-4 text-center fs-4 fw-bolder"
+    style="
+      opacity: 0.7;
+      text-shadow: 2px 2px #a3a3a3;
+      border-bottom: 2px solid #436850;
+    "
+  >
+    <mat-icon class="fs-3">join</mat-icon>
+    <span class="text-success">Join the group</span>
+  </h3>
+  <div class="mb-4 p-4 pt-0">
+    <p class="fs-5 fw-bolder mb-1">Group code</p>
+    <p class="fw-bolder" style="font-size: 13px">
+      Request the group code from your teacher, then enter it here.
+    </p>
+  </div>
+  <div class="mb-3 row m-0">
+    <form
+      class="col-lg-10 m-auto row"
+      #userForm="ngForm"
+      (ngSubmit)="onSubmit(userForm.value)"
+    >
+      <div class="mb-4 col-sm-12 p-0">
+        <input
+          type="text"
+          class="form-control p-2"
+          placeholder="Code"
+          id="group"
+          ngModel
+          #group="ngModel"
+          required
+          minlength="14"
+          name="group"
+          style="border-radius: 0; border-left: 5px solid #436850"
+        />
+        <div *ngIf="group.invalid && group.touched">
+          <p class="alert alert-danger" *ngIf="group.errors?.['minlength']">
+            Title minlength is {{group.errors?.['minlength'].requiredLength}},
+            but You have entered {{group.errors?.['minlength'].actualLength}}
+          </p>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="p-3 pt-2 pb-2 btn btn-primary"
+        style="border-radius: 0; background-color: #436850"
+        [disabled]="userForm.invalid"
+        mat-dialog-close="true"
+      >
+        Join
+      </button>
+    </form>
+  </div>
+</div>
