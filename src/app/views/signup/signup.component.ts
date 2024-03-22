@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { BehaviorService } from 'src/app/services/behavior.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,10 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent {
   hide = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
-  ngOnInit(): void {
-  }
-  img = './assets/images/true.jpg'
+  constructor(
+    private authService: AuthService,
+    private behaviorService: BehaviorService,
+    private router: Router
+  ) {}
+  ngOnInit(): void {}
+  img = './assets/images/true.jpg';
   signup(user: any) {
     this.authService.signup(user).subscribe({
       next: (res: any) => {
