@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class GroupService {
   constructor(private http: HttpClient) {}
-  url: string = 'http://localhost:8000/';
+  url: string = 'https://online-exam-app-p0fn.onrender.com/';
 
   addGroup(group: any) {
     return this.http.post(this.url + 'group', group);
