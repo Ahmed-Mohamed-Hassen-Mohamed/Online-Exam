@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ExamService {
   constructor(private http: HttpClient) {}
-  url: string = 'http://localhost:8000/';
+  url: string = 'https://online-exam-app-p0fn.onrender.com/';
   addExam(exam: any) {
     return this.http.post(this.url + 'exam', exam);
   }
