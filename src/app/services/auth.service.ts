@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
-  url: string = 'http://localhost:8000/';
+  url: string = 'https://online-exam-app-p0fn.onrender.com/';
   constructor(private http: HttpClient) {}
   signup(body: any) {
     return this.http.post(this.url + 'signup', body);
